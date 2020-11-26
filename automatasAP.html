@@ -38,8 +38,7 @@
                     <li class="nav-item px-2">
                         <a class="nav-link" href="nosotros.html" style="text-align: center;">Nosotros </a>
                     </li>
-                    <a href="automatasAP.html" class="btn btn-outline-light px-2 ml-1" style="text-align: center; max-width: 850px;">Ingresa dos aut&oacutematas AP</a>
-
+                    <a href="automatas.html" class="btn btn-outline-light px-2" style="text-align: center; max-width: 850px;">Ingresa un aut&oacutemata</a>
 
                 </ul>
             </div>
@@ -48,23 +47,28 @@
 
     <div class="container">
         <div class="border border-dark shadow rounded my-5 pb-5">
-            <h1 class="text-center">Ingresa el Aut&oacutemata AFD</h1>
+            <h1 class="text-center">Ingresa el de Aut&oacutemata AP</h1>
             <h1 class="divider1"></h1>
             <div class="row pt-3 justify-content-center">
                 <div class="col-md-6 mx-5">
                     <p><strong>1.</strong> El tipo de aut&oacutemata que ingresaras es:</p>
                     <select class="form-control mb-3" id="tipoAutomata">
-                        <option id="1AFD" value="AFD">1 AFD</option>
+                        <option id="2AP" value="AP">2 AP</option>
                     </select>
 
 
-                    <p><strong>2.</strong> Ahora indica el N&deg de estados del aut&oacutemata</p>
+                    <p><strong>2.</strong> Ahora indica el N&deg de estados de los aut&oacutematas</p>
                     
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <input class="form-control" type="number" id="Automata1" placeholder="Ingrese N&deg de estados para el automata 1" required>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group" >
+                                    <input class="form-control" type="number" id="Automata2" placeholder="Ingrese N&deg de estados para el automata 2" required>     
                                 </div>
                             </div>
                         </div>
@@ -76,6 +80,7 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <input class="form-control" type="number" id="nEntradas" placeholder="N&deg de variables del lenguaje para el automata 1" required>
+                                    <input class="form-control mt-1" type="number" id="nEntradas2" placeholder="N&deg de variables del lenguaje para el automata 2" required>
                                 </div> 
                             </div>
                         </div>
@@ -102,45 +107,92 @@
                 </div>
                 <div id="boxs" class="row mx-2">
                     
-                    <div class="col-12 pb-5">
-                        <h2 class="text-center mt-1">Tabla de Transici&oacuten Aut&oacutemata AFD Asociada</h2>
+                    <div class="col-6 border-right pb-5">
+                        <h2 class="text-center mt-1">Tabla de Transici&oacuten Aut&oacutemata N&deg1</h2>
                         <h1 class="divider mx-2 mb-1"></h1>
                         <div class="pt-4" id="tablaTransicion1" ></div>
                     </div>
+                    <div class="col-6 pb-5">
+                        <h2 class="text-center mt-1">Tabla de Transici&oacuten Aut&oacutemata N&deg2</h2>
+                        <h1 class="divider mx-2 mb-1"></h1>
+                        <div class="pt-4" id="tablaTransicion2"></div>
+                    </div>
 
-                    <a onclick="confirmarTRA()" class="btn btn-outline-light px-2 mb-3 mt-2" id="auto2" style="text-align: center; max-width: 850px;"> Confirmar Datos</a>
+                    <a onclick="confirmarTRA()" class="btn btn-outline-light px-2 mb-3 mt-4" id="auto2" style="text-align: center; max-width: 850px;"> Confirmar Datos</a>
                     
                 </div>
     
             </div>
             
-            <div id="Quintupla" class="row justify-content-center mx-2">
+            <div class="container" id="styless">
+                <div class="row" id="Quintupla">
                     
-                <div class="col-10 pb-5">
-                    <h2 class="text-center mt-1">Quintupla Aut&oacutemata AFD Asociada</h2>
-                    <h1 class="divider mx-5"></h1>
-                    <div class="text-center">
-                    <div id="primeraQuintupla1"></div>
-                    <div id="primeraQuintupla2"></div>
-                    <div id="primeraQuintupla3"></div>
-                    <div id="primeraQuintupla4"></div>
-                    <div id="primeraQuintupla5"></div>  
+                    <div id="bordes"  class="col-md-6 border-right pt-3">
+                        <h3 class="text-center">Quintupla Aut&oacutemata N&deg1</h3>
+                        <h1 class="divider"></h1>
+                        <div id="primeraQuintupla1"></div>
+                        <div id="primeraQuintupla2"></div>
+                        <div id="primeraQuintupla3"></div>
+                        <div id="primeraQuintupla4"></div>
+                        <div id="primeraQuintupla5"></div>    
+                    </div>
+                    <h1></h1>
+                    <div class="col-md-6 pt-3">
+                        <h3 class="text-center">Quintupla Aut&oacutemata N&deg2</h3>
+                        <h1 class="divider"></h1>
+                        <div id="segundaQuintupla1"></div>
+                        <div id="segundaQuintupla2"></div>
+                        <div id="segundaQuintupla3"></div>
+                        <div id="segundaQuintupla4"></div>
+                        <div id="segundaQuintupla5"></div>    
                     </div>
                 </div>
-
             </div>
-
             <div id="lenguajeER" class="row justify-content-center mx-2">
                     
                 <div class="col-10 pb-5">
                     <h2 class="text-center mt-5">Lenguaje ER asociado al Automata AFD</h2>
                     <h1 class="divider mx-5"></h1>
                     <div id="lenguajeER"></div>
-                    <a onclick="" class="btn btn-outline-light px-2 mb-3 mt-2" id="auto2" style="text-align: center; max-width: 850px;"> Obtener ER del Aut&oacutemata</a>
+                    <a onclick="" class="btn btn-outline-light px-2 mb-3 mt-2" id="auto2" style="text-align: center; max-width: 850px;"> Generar ER del Aut&oacutemata</a>
                      
                 </div>
 
             </div>
+
+            <div class="row pb-5 justify-content-center">
+                <div class="col-7 mt-5 my-2">
+                    
+                    <h3 class="text-center mt-2">Uni&oacuten</h3>
+                    <h1 class="dividerGr"></h1>
+                    <a onclick="Complemento()" class="btn btn-outline-light mt-4 marginbtn mb-3">Haz click para ver!</a>
+                    <div id="rowUnion2" class="row">
+                        <div id="mensajeComplemento" class="ml-3"></div>
+                        <div id="automata1Com" class="ml-3"></div>
+                        <div id="conjuntoComplemento" class="ml-3"></div>
+                        <div id="entradaComplemento" class="ml-3"></div>
+                        <div id="salidaComplemento" class="ml-3"></div>
+                        <div id="lenguajeComplemento" class="ml-3"></div>
+                        <div id="transicionComplemento" class="ml-3"></div>
+                    </div>
+                </div>
+                <div class="col-7 mt-5 my-2">
+                    
+                    <h3 class="text-center mt-2">Concatenaci&oacuten</h3>
+                    <h1 class="dividerGr"></h1>
+                    <a onclick="Complemento()" class="btn btn-outline-light mt-4 marginbtn mb-3">Haz click para ver!</a>
+                    <div id="rowUnion2" class="row">
+                        <div id="mensajeComplemento" class="ml-3"></div>
+                        <div id="automata1Com" class="ml-3"></div>
+                        <div id="conjuntoComplemento" class="ml-3"></div>
+                        <div id="entradaComplemento" class="ml-3"></div>
+                        <div id="salidaComplemento" class="ml-3"></div>
+                        <div id="lenguajeComplemento" class="ml-3"></div>
+                        <div id="transicionComplemento" class="ml-3"></div>
+                    </div>
+                </div>
+            </div>
+            
 
     </div>
 

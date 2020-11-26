@@ -146,6 +146,10 @@ span:hover {
     transition: background-color 1.5s;
 }
 
+.margina {
+    margin-bottom: 800px !important;
+}
+
 
 /* Seccion tecnologias */
 
@@ -299,4 +303,4 @@ input:invalid {
 
 input:valid {
     border: 2px solid black;
-}
+}a
