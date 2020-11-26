@@ -349,61 +349,137 @@ function llenarLEN() {
 
 }
 
-var transiciones = ['Entrada', 'Lectura', 'Destino'];
+
+var transiciones0 = ['Entrada', 'Lectura', 'Destino'];
+var transiciones = ['Entrada', 'Lectura', 'Destino', 'Ingresar a la Pila', 'Sacar elemento'];
 
 const tablaTransicion1 = document.querySelector("#tablaTransicion1");
 const tablaTransicion2 = document.querySelector("#tablaTransicion2");
 
 function TablaTransicion(arrayConjunto, arraylenguaje, tablaTransicion1) {
-    var arrayTra = [];
-    var tablaPadre = document.createElement('table'),
-        filaTitulo = document.createElement('tr');
-    tablaPadre.style.marginLeft = "93px";
-    tablaPadre.style.paddingBottom = "80px";
-    tablaPadre.style.paddingTop = "80px";
-    for (let i = 0; i < transiciones.length; i++) {
-        var colTitulo = document.createElement('td');
-        colTitulo.className = 'formatoTablaTitulo ';
-        colTitulo.textContent = transiciones[i];
-        colTitulo.style.width = "100px";
-        colTitulo.style.height = "30px";
-        colTitulo.style.backgroundColor = "#CDA434";
-        colTitulo.style.textAlign = "center";
-        filaTitulo.appendChild(colTitulo);
-    }
-    tablaPadre.appendChild(filaTitulo);
-    for (let i = 0; i < arrayConjunto.length; i++) {
-        for (let j = 0; j < arraylenguaje.length; j++) {
-            var filaDatos = document.createElement('tr'),
-                colEstados = document.createElement('td'),
-                collenguaje = document.createElement('td'),
-                colInput = document.createElement('td');
-            var input = document.createElement('input');
-            filaDatos.style.width = "100px";
-            filaDatos.style.height = "30px";
-            filaDatos.style.backgroundColor = "#cda4345b";
-            filaDatos.style.textAlign = "center";
-            filaDatos.style.borderColor = "#1a1a1a";
-            filaDatos.style.marginBottom = "10px";
-            colEstados.className = 'formatoTabla';
-            colEstados.textContent = arrayConjunto[i];
-            collenguaje.className = 'formatoTabla';
-            collenguaje.textContent = arraylenguaje[j];
-            input.className = 'forma-control';
-            input.setAttribute('placeholder', 'Estado Destino');
-            input.setAttribute('type', 'text');
-            input.id = `${arrayConjunto[i]}-${arraylenguaje[j]}`;
-            arrayTra.push(input.id);
-            colInput.appendChild(input);
-            filaDatos.appendChild(colEstados);
-            filaDatos.appendChild(collenguaje);
-            filaDatos.appendChild(colInput);
-            tablaPadre.appendChild(filaDatos);
+    var TipoDato = identificaDatos();
+    if (TipoDato === 'AFD') {
+        var arrayTra = [];
+        var tablaPadre = document.createElement('table'),
+            filaTitulo = document.createElement('tr');
+        tablaPadre.style.marginLeft = "150px";
+        tablaPadre.style.paddingBottom = "80px";
+        tablaPadre.style.paddingTop = "80px";
+        for (let i = 0; i < transiciones0.length; i++) {
+            var colTitulo = document.createElement('td');
+            colTitulo.className = 'formatoTablaTitulo ';
+            colTitulo.textContent = transiciones0[i];
+            colTitulo.style.width = "100px";
+            colTitulo.style.height = "30px";
+            colTitulo.style.backgroundColor = "#CDA434";
+            colTitulo.style.textAlign = "center";
+            filaTitulo.appendChild(colTitulo);
         }
-    }
-    tablaTransicion1.appendChild(tablaPadre);
+        tablaPadre.appendChild(filaTitulo);
+        for (let i = 0; i < arrayConjunto.length; i++) {
+            for (let j = 0; j < arraylenguaje.length; j++) {
+                var filaDatos = document.createElement('tr'),
+                    colEstados = document.createElement('td'),
+                    collenguaje = document.createElement('td'),
+                    colInput = document.createElement('td');
+                var input = document.createElement('input');
+                filaDatos.style.width = "70px";
+                filaDatos.style.height = "30px";
+                filaDatos.style.backgroundColor = "#cda4345b";
+                filaDatos.style.textAlign = "center";
+                filaDatos.style.borderColor = "#1a1a1a";
+                filaDatos.style.marginBottom = "10px";
+                colEstados.className = 'formatoTabla';
+                colEstados.textContent = arrayConjunto[i];
+                collenguaje.className = 'formatoTabla';
+                collenguaje.textContent = arraylenguaje[j];
+                input.className = 'forma-control';
+                input.setAttribute('placeholder', 'Estado Destino');
+                input.setAttribute('type', 'text');
+                input.style.width = "125px";
+                input.id = `${arrayConjunto[i]}-${arraylenguaje[j]}`;
+                arrayTra.push(input.id);
+                colInput.appendChild(input);
+                filaDatos.appendChild(colEstados);
+                filaDatos.appendChild(collenguaje);
+                filaDatos.appendChild(colInput);
+                tablaPadre.appendChild(filaDatos);
+            }
+        }
+        tablaTransicion1.appendChild(tablaPadre);
 
-    return arrayTra;
+        return arrayTra;
+    } else if (TipoDato === 'AP') {
+        var arrayTra = [];
+        var tablaPadre = document.createElement('table'),
+            filaTitulo = document.createElement('tr');
+        tablaPadre.style.marginLeft = "3px";
+        tablaPadre.style.paddingBottom = "80px";
+        tablaPadre.style.paddingTop = "80px";
+        for (let i = 0; i < transiciones.length; i++) {
+            var colTitulo = document.createElement('td');
+            colTitulo.className = 'formatoTablaTitulo ';
+            colTitulo.textContent = transiciones[i];
+            colTitulo.style.width = "50px";
+            colTitulo.style.height = "30px";
+            colTitulo.style.backgroundColor = "#CDA434";
+            colTitulo.style.textAlign = "center";
+            filaTitulo.appendChild(colTitulo);
+        }
+        tablaPadre.appendChild(filaTitulo);
+        for (let i = 0; i < arrayConjunto.length; i++) {
+            for (let j = 0; j < arraylenguaje.length; j++) {
+                var filaDatos = document.createElement('tr'),
+                    colEstados = document.createElement('td'),
+                    collenguaje = document.createElement('td'),
+                    colInput = document.createElement('td'),
+                    colInput2 = document.createElement('td'),
+                    colInput3 = document.createElement('td');
+                var input = document.createElement('input');
+                var input2 = document.createElement('input');
+                var input3 = document.createElement('input');
+                filaDatos.style.width = "50px";
+                filaDatos.style.height = "30px";
+                filaDatos.style.backgroundColor = "#cda4345b";
+                filaDatos.style.textAlign = "center";
+                filaDatos.style.borderColor = "#1a1a1a";
+                filaDatos.style.marginBottom = "10px";
+                colEstados.className = 'formatoTabla';
+                colEstados.textContent = arrayConjunto[i];
+                collenguaje.className = 'formatoTabla';
+                collenguaje.textContent = arraylenguaje[j];
+                input.className = 'forma-control';
+                input2.className = 'forma-control';
+                input.setAttribute('placeholder', 'Estado Destino');
+                input.setAttribute('type', 'text');
+                input.style.width = "125px";
+                input2.style.width = "145px";
+                input3.style.width = "125px";
+                input2.setAttribute('placeholder', 'Ingresar elemento');
+                input2.setAttribute('type', 'text');
+                input3.setAttribute('placeholder', 'Sacar elemento');
+                input3.setAttribute('type', 'text');
+                input.id = `${arrayConjunto[i]}-${arraylenguaje[j]}`;
+                input2.id = `PilaEntra-${arrayConjunto[i]}-${arraylenguaje[j]}`;
+                input3.id = `PilaSaca-${arrayConjunto[i]}-${arraylenguaje[j]}`;
+                arrayTra.push(input.id);
+                colInput.appendChild(input);
+                colInput2.appendChild(input2);
+                colInput3.appendChild(input3);
+                filaDatos.appendChild(colEstados);
+                filaDatos.appendChild(collenguaje);
+                filaDatos.appendChild(colInput);
+                filaDatos.appendChild(colInput2);
+
+                filaDatos.appendChild(colInput3);
+                tablaPadre.appendChild(filaDatos);
+            }
+        }
+        tablaTransicion1.appendChild(tablaPadre);
+
+        return arrayTra;
+    }
+
 }
 
 function confirmar() {
@@ -421,12 +497,7 @@ function confirmar() {
     } else if (TipoDato == 'AP') {
         TablaTransicion(aux1[0], aux[0], tablaTransicion1);
         TablaTransicion(aux1[1], aux[1], tablaTransicion2);
-
-
     }
-
-
-
 }
 
 function llenarTransicion1() {
@@ -461,6 +532,70 @@ function llenarTransicion2() {
     return arrayTransiciones;
 }
 
+function llenarPila1() {
+
+    var aux = llenarNuevo()[0];
+    var len = llenarLEN()[0];
+    var arrayPilaEntra = [];
+    var arrayPilaSaca = [];
+    var arrayresultante = [];
+
+    for (let i = 0; i < aux.length; i++) {
+        for (let j = 0; j < len.length; j++) {
+            var t1 = document.getElementById(`PilaEntra-${aux[i]}-${len[j]}`).value;
+            arrayPilaEntra.push(t1);
+        }
+    }
+
+    for (let m = 0; m < aux.length; m++) {
+        for (let p = 0; p < len.length; p++) {
+            var t2 = document.getElementById(`PilaSaca-${aux[m]}-${len[p]}`).value;
+            arrayPilaSaca.push(t2);
+        }
+    }
+
+
+    console.log("Esta es la pila de entrada:", arrayPilaEntra);
+    console.log("Esta es la pila de salida:", arrayPilaSaca);
+    arrayresultante.push(arrayPilaEntra); //0
+    arrayresultante.push(arrayPilaSaca); //1
+    return arrayresultante;
+
+
+}
+
+function llenarPila2() {
+
+    var aux = llenarNuevo()[1];
+    var len = llenarLEN()[1];
+    var arrayPilaEntra = [];
+    var arrayPilaSaca = [];
+    var arrayresultante = [];
+
+    for (let i = 0; i < aux.length; i++) {
+        for (let j = 0; j < len.length; j++) {
+            var t1 = document.getElementById(`PilaEntra-${aux[i]}-${len[j]}`).value;
+            arrayPilaEntra.push(t1);
+        }
+    }
+
+    for (let m = 0; m < aux.length; m++) {
+        for (let p = 0; p < len.length; p++) {
+            var t2 = document.getElementById(`PilaSaca-${aux[m]}-${len[p]}`).value;
+            arrayPilaSaca.push(t2);
+        }
+    }
+
+
+    console.log("Esta es la pila de entrada:", arrayPilaEntra);
+    console.log("Esta es la pila de salida:", arrayPilaSaca);
+
+    arrayresultante.push(arrayPilaEntra); //0
+    arrayresultante.push(arrayPilaSaca); //1
+    return arrayresultante;
+
+}
+
 
 function confirmarTRA() {
     var TipoDatos = identificaDatos();
@@ -475,7 +610,7 @@ function confirmarTRA() {
             transicionCompleta();
         }
     } else if (TipoDatos == 'AP') {
-        console.log("entro a validador AFND");
+        console.log("entro a validador AP");
         var aux3 = validador3();
         var aux4 = validador4();
         if (aux3 === 0) {
@@ -485,6 +620,8 @@ function confirmarTRA() {
         } else {
             llenarTransicion1();
             llenarTransicion2();
+            llenarPila1();
+            llenarPila2();
             primeraQuintupla();
             transicionCompleta();
         }
@@ -526,11 +663,17 @@ function primeraQuintupla() {
     var entrada1 = llenarNuevo()[2];
     var salida1 = llenarNuevo()[3];
     var lenguaje = llenarLEN()[0];
+    var pilaEN1 = llenarPila1()[0];
+
+    var pilaRe1 = AutomataPila()[0];
     var transicion1 = transicionCompleta()[0];
     var conjunto2 = llenarNuevo()[1];
     var lenguaje2 = llenarLEN()[1];
     var entrada2 = llenarNuevo()[4];
     var salida2 = llenarNuevo()[5];
+    var pilaEN2 = llenarPila2()[0];
+
+    var pilaRe2 = AutomataPila()[1];
     var transicion2 = transicionCompleta()[1];
 
     const output1 = document.querySelector("#primeraQuintupla1");
@@ -538,30 +681,48 @@ function primeraQuintupla() {
     const output3 = document.querySelector("#primeraQuintupla3");
     const output4 = document.querySelector("#primeraQuintupla4");
     const output5 = document.querySelector("#primeraQuintupla5");
-    const output6 = document.querySelector("#segundaQuintupla1");
-    const output7 = document.querySelector("#segundaQuintupla2");
-    const output8 = document.querySelector("#segundaQuintupla3");
-    const output9 = document.querySelector("#segundaQuintupla4");
-    const output10 = document.querySelector("#segundaQuintupla5");
+    const output6 = document.querySelector("#primeraQuintupla6");
+    const output7 = document.querySelector("#primeraQuintupla7");
+    const output8 = document.querySelector("#primeraQuintupla8");
+    const output9 = document.querySelector("#primeraQuintupla9");
+
+
+    const output10 = document.querySelector("#segundaQuintupla1");
+    const output11 = document.querySelector("#segundaQuintupla2");
+    const output12 = document.querySelector("#segundaQuintupla3");
+    const output13 = document.querySelector("#segundaQuintupla4");
+    const output14 = document.querySelector("#segundaQuintupla5");
+    const output15 = document.querySelector("#segundaQuintupla6");
+    const output16 = document.querySelector("#segundaQuintupla7");
+    const output17 = document.querySelector("#segundaQuintupla8");
+    const output18 = document.querySelector("#segundaQuintupla9");
+
+    //Primera Septupla
 
     output1.textContent = (`El conjunto Q de estados es:  [${conjunto1}]:`);
     output2.textContent = (`El estado inicial es:  [${entrada1}]`);
     output3.textContent = (`El conjunto de salidas del automata 1 es:  [${salida1}]`);
     output4.textContent = (`El alfabeto asociado es:  [${lenguaje}]:`);
     output5.textContent = (`La transicion 1 es:  [${transicion1}]:`);
-    output6.textContent = (`El conjunto Q de estados es:  [${conjunto2}]:`);
-    output7.textContent = (`El estado inicial es:  [${entrada2}]`);
-    output8.textContent = (`El conjunto de salidas del automata 2 es:  [${salida2}]`);
-    output9.textContent = (`El alfabeto asociado es:  [${lenguaje2}]:`);
-    output10.textContent = (`La transicion 2 es:  [${transicion2}]:`);
-    output10.className = "mb-5";
+    output6.textContent = (`El simbolo inicial de la pila: Z`);
+    output7.textContent = (`Pila 1 asociada:  [${pilaEN1}]:`);
+    output8.textContent = (`Si se utilizo un correcto desarrollo la Pila Resultante: [Z]`);
+    output9.textContent = (`Pila Resultante:  [${pilaRe1}]`);
+    output9.className = "mb-5";
+    //Segunda Septupla
+
+    output10.textContent = (`El conjunto Q de estados es:  [${conjunto2}]:`);
+    output11.textContent = (`El estado inicial es:  [${entrada2}]`);
+    output12.textContent = (`El conjunto de salidas del automata 2 es:  [${salida2}]`);
+    output13.textContent = (`El alfabeto asociado es:  [${lenguaje2}]:`);
+    output14.textContent = (`La transicion 2 es:  [${transicion2}]:`);
+    output15.textContent = (`El simbolo inicial de la pila: Z`);
+    output16.textContent = (`Pila 2 asociada:  [${pilaEN2}]:`);
+    output17.textContent = (`Si se utilizo un correcto desarrollo la Pila Resultante: [Z]`);
+    output18.textContent = (`Pila Resultante:  [${pilaRe2}]`);
+    output18.className = "mb-5";
 
 }
-
-
-
-
-
 
 
 function validador1() {
@@ -615,7 +776,7 @@ function validador3() {
     var contador2 = 0;
     var aux1;
     for (let k = 0; k < transi.length; k++) {
-        if (transi[k] === "@") {
+        if (transi[k] === "@" || transi[k] === "Z" || transi[k] === "z") {
             contador2++;
         }
     }
@@ -643,7 +804,7 @@ function validador4() {
     var contador2 = 0;
     var aux1;
     for (let k = 0; k < transi.length; k++) {
-        if (transi[k] === "@") {
+        if (transi[k] === "@" || transi[k] === "Z" || transi[k] === "z") {
             contador2++;
         }
     }
@@ -771,5 +932,131 @@ function transicionCompleta() {
         return arrayresultante;
 
     }
+
+}
+
+function ObtenerDatos() {
+    var transicion1 = llenarTransicion1();
+    //var transicion2 = llenarTransicion2();
+    var aux1 = [];
+    var aux2 = llenarLENAFD(); // x y
+    //var aux7 = llenarLEN()[1];
+    var ayuda1;
+    var ayuda2;
+    var ayuda3;
+    var ayuda4;
+    var conjunto1 = llenarNuevo()[0];
+    //var conjunto2 = llenarNuevo()[1];
+    var aux3 = [],
+        aux4 = [],
+        aux5 = [],
+        aux6 = [];
+    for (let i = 0; i < conjunto1.length; i++) {
+        for (let j = 0; j < aux2.length; j++) {
+            ayuda1 = conjunto1[i];
+            aux3.push(ayuda1);
+            ayuda2 = aux2[j];
+            aux4.push(ayuda2);
+        }
+    }
+    aux1.push(aux3); //Conjunto1 [0]
+    aux1.push(aux4); //Lenguaje1 [1]
+    aux1.push(transicion1); //transicion1 [2]
+    /*for (let k = 0; k < conjunto2.length; k++) {
+        for (let l = 0; l < aux7.length; l++) {
+            ayuda3 = conjunto2[k];
+            aux5.push(ayuda3);
+            ayuda4 = aux7[l];
+            aux6.push(ayuda4);
+        }
+    }
+    aux1.push(aux5); //Conjunto2 [3]
+    aux1.push(aux6); //Lenguaje2 [4]
+    aux1.push(transicion2); //transicion2 [5]*/
+    return aux1;
+}
+
+// function ER(){
+//     var lenguaje = ObtenerDatos()[1];
+//     var conjunto = ObtenerDatos()[0];
+//     var transicion = ObtenerDatos()[2];
+//     var aux = [];
+//     var aux2 = [];
+//     var aux3 = [];
+//     var aux4 = [], aux5 = [], aux6 = [];
+//     for (let i = 0; i < lenguaje.length; i++) {
+//         if(conjunto[i]===transicion[i]){
+//             aux.push(conjunto[i]);
+//             aux2.push(lenguaje[i]);
+//             aux3.push("*");
+//         }
+//         else{
+//             aux.push(conjunto[i]);
+//             aux2.push(lenguaje[i]);
+//             aux3.push(transicion[i]);
+//         }
+//     }
+//     for (let j = 0; j < aux2.length; j++) {
+//         if(aux[j] !== aux[j+1]){
+//             for(let k = 0; k < aux2.length; k++){
+//                 if(transicion[k] === aux[j]){
+//                     if(aux[k]===transicion[j]){
+//                         // aux3[i] = i;
+//                         // aux4.push(i);
+//                         // aux5.push()
+//                     }else if(aux[k]===transicion[j-1]){
+
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+function AutomataPila() {
+    var arraypila = [];
+    var arraypila2 = [];
+    var arrayresultante = [];
+    arraypila.push('Z');
+    arraypila2.push('Z');
+    var arrayEntra1 = llenarPila1()[0];
+    var arraySale1 = llenarPila1()[1];
+    var arrayEntra2 = llenarPila2()[0];
+    var arraySale2 = llenarPila2()[1];
+    for (let i = 0; i <= arrayEntra1.length; i++) {
+        if (arraySale1[i] === "@" && arrayEntra1[i] === "@") {
+            console.log("estado vacio");
+        } else if (arraySale1[i] === "@" && arrayEntra1[i] !== "@") {
+            arraypila.push(arrayEntra1[i]);
+        } else if (arraySale1[i] !== "@" && arrayEntra1[i] === "@") {
+            for (let t = arraypila.length; t > 0; t--) {
+                if (arraypila[t] === arraySale1[i]) {
+                    arraypila.pop();
+                }
+            }
+
+        }
+    }
+    console.log("Esta es la pila limpia: ", arraypila);
+
+    for (let i = 0; i <= arrayEntra2.length; i++) {
+        if (arraySale2[i] === "@" && arrayEntra2[i] === "@") {
+            console.log("estado vacio");
+        } else if (arraySale2[i] === "@" && arrayEntra2[i] !== "@") {
+            arraypila2.push(arrayEntra2[i]);
+        } else if (arraySale2[i] !== "@" && arrayEntra2[i] === "@") {
+            for (let t = arraypila2.length; t > 0; t--) {
+                if (arraypila2[t] === arraySale2[i]) {
+                    arraypila2.pop();
+                }
+            }
+
+        }
+    }
+    console.log("Esta es la pila limpia 2: ", arraypila2);
+    arrayresultante.push(arraypila); //0
+    arrayresultante.push(arraypila2); //1
+
+    return arrayresultante;
 
 }
