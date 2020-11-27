@@ -939,8 +939,8 @@ function ObtenerDatos() {
     var transicion1 = llenarTransicion1();
     //var transicion2 = llenarTransicion2();
     var aux1 = [];
-    var aux2 = llenarLENAFD(); // x y
-    //var aux7 = llenarLEN()[1];
+    var aux2 = llenarLENAFD()[0]; // x y
+    //var aux2 = llenarLEN()[1];
     var ayuda1;
     var ayuda2;
     var ayuda3;
@@ -955,6 +955,7 @@ function ObtenerDatos() {
         for (let j = 0; j < aux2.length; j++) {
             ayuda1 = conjunto1[i];
             aux3.push(ayuda1);
+            console.log("AUX3 VALORES =",aux3);
             ayuda2 = aux2[j];
             aux4.push(ayuda2);
         }
@@ -1058,5 +1059,184 @@ function AutomataPila() {
     arrayresultante.push(arraypila2); //1
 
     return arrayresultante;
+
+}
+
+function ER() {
+    var lenguaje = ObtenerDatos()[1];
+    var conjunto = ObtenerDatos()[0];
+    var transicion = ObtenerDatos()[2];
+    console.log("valores a trabajar =", conjunto, lenguaje, transicion);
+    var aux = [];
+    var aux2 = [];
+    var aux3 = [];
+    var aux4 = [],
+        aux5 = [],
+        aux6 = [];
+    for (let i = 0; i < conjunto.length; i++) {
+        if (conjunto[i] === transicion[i]) {
+            // aux.push(conjunto[i]);
+            // aux2.push(lenguaje[i]);
+            transicion[i]="*";
+        } else {
+            // aux.push(conjunto[i]);
+            // aux2.push(lenguaje[i]);
+            // aux3.push(transicion[i]);
+        }
+    }
+    console.log("TRANSICION =",transicion);
+    for (let j = 0; j < lenguaje.length; j++) {
+        if (conjunto[j] !== conjunto[j + 1]) {
+            for (let k = 0; k < lenguaje.length; k++) {
+                if (transicion[k] === conjunto[j]) {
+                    if (conjunto[k] === transicion[j]) {
+                        //aux3[k] = "k";
+                        console.log("valor cambiado a k =", transicion[k]);
+                        var valor1 = lenguaje[j - 1] + transicion[j - 1] + "(" + lenguaje[j] + ")"; //"(" + lenguaje[j] + transicion[j] + ")"
+                        console.log("VALOR1 =",valor1);
+                        aux4.push(valor1);
+                        transicion[k] = "k";
+                        console.log("primer valor de valores =",valor1);
+                    } else if (conjunto[k] === transicion[j - 1]) {
+                        //aux3[k] = "k";
+                        var valor1 = lenguaje[j - 1] + transicion[j - 1] + "(" + lenguaje[j] +")"; //+"(" + lenguaje[j] + transicion[j] + ")"
+                        aux4.push(valor1);
+                        transicion[k] = "k";
+                        console.log("segundo valor de valores =",valor1);
+                    }
+                }
+            }
+        }
+    }
+    console.log("LLEGA AQUI", aux4);
+    let p=0;
+    for (let m = 0; m < conjunto.length; m++) {
+        console.log("LLEGA AQUI", conjunto.length);
+        if (conjunto[m] === conjunto[m + 1]) {
+            console.log("LLEGA AQUI 2", aux6);
+            if (transicion[m] === "k") {
+                console.log("LLEGA AQUI 3", aux6);
+                for (let i = 0; i < aux4.length; i++) {
+                    console.log("LLEGA AQUI 4", aux6);
+                    if (aux4[i] !== "0") {
+                        var valor3 = conjunto[m] + lenguaje[m] + aux4[i];
+                        console.log("primer valor =", valor3);
+                        aux6.push(valor3);
+                        aux4[i] = "0";
+                        i = aux4.length;
+                        p++;
+                    }
+                }
+            } else if ((transicion[m + 1] === "k")) {
+                for (let l = 0; l < aux4.length; l++) {
+                    if (aux4[l+1] !== "0") {
+                        var valor3 = conjunto[m-1] + " = " + lenguaje[m] + transicion[m] + lenguaje[m+1] + aux4[l];
+                        console.log("segundo valor =", valor3, aux4[l]);
+                        aux6.push(valor3);
+                        aux4[l] = "0";
+                        l = aux4.length;
+                        p++;
+                    }
+                }
+            } else {
+                var valor3 = conjunto[m] + " = " + lenguaje[m] + transicion[m] + lenguaje[m+1] + transicion[m+1];
+                console.log("tercer valor =", valor3);
+                aux6.push(valor3);
+            }
+        }
+    }
+    console.log("este es el array con el resultado final con los procesos de cada paso:", aux6);
+    return aux6;
+}
+
+function union() {
+    var validacion = AutomataPila()[0];
+    var validacion2 = AutomataPila()[1];
+    if (validacion.length > 1 && validacion2.length > 1) {
+        window.alert("La pila no se vacio correctamente");
+    } else {
+
+        union2();
+
+    }
+}
+
+function concatenacion() {
+    var validacion3 = AutomataPila()[0];
+    var validacion4 = AutomataPila()[1];
+    if (validacion3.length > 1 && validacion4.length > 1) {
+        window.alert("La pila no se vacio correctamente");
+    } else {
+
+
+
+    }
+}
+
+
+function union2() {
+    var newEstados = ['Q0'];
+    var automata1 = llenarNuevo()[0];
+    var automata2 = llenarNuevo()[1];
+    var salidas1 = llenarNuevo()[3];
+    var salidas2 = llenarNuevo()[5];
+    var entradas1 = llenarNuevo()[2];
+    var entradas2 = llenarNuevo()[4];
+    var lenguajeUnion = [];
+    var lenguaje1 = llenarLEN()[0];
+    var lenguaje2 = llenarLEN()[1];
+    var conjuntoUnion = [],
+        unionSalidaas = [],
+        transicionUnion = [];
+
+    conjuntoUnion.push(newEstados);
+
+    for (let i = 0; i < automata1.length; i++) {
+        conjuntoUnion.push(automata1[i]);
+    }
+
+    for (let k = 0; k < automata2.length; k++) {
+        conjuntoUnion.push(automata2[k]);
+    }
+
+    for (let a = 0; a < salidas1.length; a++) {
+        unionSalidaas.push(salidas1[a]);
+    }
+    for (let b = 0; b < salidas2.length; b++) {
+        unionSalidaas.push(salidas2[b]);
+    }
+    lenguajeUnion.push(lenguaje1);
+    lenguajeUnion.push(lenguaje2);
+    lenguajeUnion.push("@");
+
+    var transicionAutomata1 = transicionCompleta()[0];
+    var transicionAutomata2 = transicionCompleta()[1];
+
+    transicionUnion.push(newEstados[0] + "-@-->" + entradas1[0]);
+    transicionUnion.push(newEstados[0] + "-@-->" + entradas2[0]);
+
+    for (let c = 0; c < transicionAutomata1.length; c++) {
+        transicionUnion.push(transicionAutomata1[c]);
+    }
+    for (let d = 0; d < transicionAutomata2.length; d++) {
+        transicionUnion.push(transicionAutomata2[d]);
+    }
+    const output1 = document.querySelector("#conjuntoUnion");
+    const output2 = document.querySelector("#entradaUnion");
+    const output3 = document.querySelector("#salidaUnion");
+    const output4 = document.querySelector("#lenguajeUnion");
+    const output5 = document.querySelector("#transicionUnion");
+
+    output1.textContent = (`El conjunto union de estados es =  [${conjuntoUnion}]:`);
+    output1.className = "mb-2 ml-3";
+    output2.textContent = (`El estado inicial viene dado por =  [${newEstados}]`);
+    output2.className = "mb-2 ml-3";
+    output3.textContent = (`Las salidas de Union del automata 1 es =  [${unionSalidaas}]`);
+    output3.className = "mb-2 ml-3";
+    output4.textContent = (`El alfabeto asociado es =  [${lenguajeUnion}]:`);
+    output4.className = "mb-2 ml-3";
+    output5.textContent = (`La transicion de union es =  [${transicionUnion}]:`);
+    output5.className = "mb-2 ml-3";
+
 
 }
