@@ -98,9 +98,10 @@ margin-right: 5% !important;
 
 .dividerGr {
     border-bottom: 2px solid black;
+    margin: 0;
     margin-left: 7% !important;
     margin-right: 7% !important;
-    margin: 0;
+    
 }
 
 #rowUnion {

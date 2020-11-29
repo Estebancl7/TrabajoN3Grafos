@@ -15,7 +15,6 @@ function identificaDatos() {
 function addFormulario() {
     let a = 1;
     let count1 = 1;
-    let count2 = 2;
     let numero = document.getElementById("Automata1").value;
 
     const texto1 = document.querySelector("#formulario");
@@ -930,20 +929,14 @@ function transicionCompleta() {
 
 function ObtenerDatos() {
     var transicion1 = llenarTransicion1();
-    //var transicion2 = llenarTransicion2();
     var aux1 = [];
     var aux2 = llenarLENAFD()[0]; // x y
-    //var aux2 = llenarLEN()[1];
+
     var ayuda1;
     var ayuda2;
-    var ayuda3;
-    var ayuda4;
     var conjunto1 = llenarNuevo()[0];
-    //var conjunto2 = llenarNuevo()[1];
     var aux3 = [],
-        aux4 = [],
-        aux5 = [],
-        aux6 = [];
+        aux4 = [];
     for (let i = 0; i < conjunto1.length; i++) {
         for (let j = 0; j < aux2.length; j++) {
             ayuda1 = conjunto1[i];
@@ -956,56 +949,9 @@ function ObtenerDatos() {
     aux1.push(aux3); //Conjunto1 [0]
     aux1.push(aux4); //Lenguaje1 [1]
     aux1.push(transicion1); //transicion1 [2]
-    /*for (let k = 0; k < conjunto2.length; k++) {
-        for (let l = 0; l < aux7.length; l++) {
-            ayuda3 = conjunto2[k];
-            aux5.push(ayuda3);
-            ayuda4 = aux7[l];
-            aux6.push(ayuda4);
-        }
-    }
-    aux1.push(aux5); //Conjunto2 [3]
-    aux1.push(aux6); //Lenguaje2 [4]
-    aux1.push(transicion2); //transicion2 [5]*/
+
     return aux1;
 }
-
-// function ER(){
-//     var lenguaje = ObtenerDatos()[1];
-//     var conjunto = ObtenerDatos()[0];
-//     var transicion = ObtenerDatos()[2];
-//     var aux = [];
-//     var aux2 = [];
-//     var aux3 = [];
-//     var aux4 = [], aux5 = [], aux6 = [];
-//     for (let i = 0; i < lenguaje.length; i++) {
-//         if(conjunto[i]===transicion[i]){
-//             aux.push(conjunto[i]);
-//             aux2.push(lenguaje[i]);
-//             aux3.push("*");
-//         }
-//         else{
-//             aux.push(conjunto[i]);
-//             aux2.push(lenguaje[i]);
-//             aux3.push(transicion[i]);
-//         }
-//     }
-//     for (let j = 0; j < aux2.length; j++) {
-//         if(aux[j] !== aux[j+1]){
-//             for(let k = 0; k < aux2.length; k++){
-//                 if(transicion[k] === aux[j]){
-//                     if(aux[k]===transicion[j]){
-//                         // aux3[i] = i;
-//                         // aux4.push(i);
-//                         // aux5.push()
-//                     }else if(aux[k]===transicion[j-1]){
-
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
 
 function AutomataPila() {
     var arraypila = [];
@@ -1133,13 +1079,11 @@ function ER() { //SOLO PARA DOS ESTADOS!
 function union() {
     var validacion = AutomataPila()[0];
     var validacion2 = AutomataPila()[1];
-    if (validacion.length > 1 ) {
+    if (validacion.length > 1) {
         window.alert("La pila 1 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
-    } 
-    else if(validacion2.length > 1 ){
-        window.alert("La pila 2 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");        
-    }
-    else if(validacion.length === 1 && validacion2.length === 1) {
+    } else if (validacion2.length > 1) {
+        window.alert("La pila 2 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
+    } else if (validacion.length === 1 && validacion2.length === 1) {
         union2();
     }
 }
@@ -1147,12 +1091,11 @@ function union() {
 function concatenacion() {
     var validacion3 = AutomataPila()[0];
     var validacion4 = AutomataPila()[1];
-    if (validacion3.length > 1 ) {
+    if (validacion3.length > 1) {
         window.alert("La pila 1 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
-    }else if(validacion4.length>1){
+    } else if (validacion4.length > 1) {
         window.alert("La pila 2 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
-    } 
-    else if(validacion3.length === 1 && validacion4.length === 1) {
+    } else if (validacion3.length === 1 && validacion4.length === 1) {
         concatenacion2();
     }
 }
@@ -1334,7 +1277,6 @@ function ER2() {
                                 NuevosLenguaje.push(lenguaje[m]);
                                 NuevasSalidas.push(transicion[m]);
                                 p--;
-
                             } else {
                                 NuevosLenguaje.push(lenguaje[m]);
                                 NuevasSalidas.push("*");
@@ -1355,11 +1297,11 @@ function ER2() {
     }
     return Er;
 
-    
+
 }
 
-function imprimirEr(){
-    var expresion= ER2();
+function imprimirEr() {
+    var expresion = ER2();
     const output1 = document.querySelector("#LenguajeAsociado1");
     const output2 = document.querySelector("#LenguajeAsociado2");
     output1.textContent = (`Expresion regular del Automata`);
