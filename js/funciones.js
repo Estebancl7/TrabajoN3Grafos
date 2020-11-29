@@ -136,10 +136,7 @@ function addFormulario() {
         document.getElementById('confirmar').appendChild(div);
 
     }
-
-
 }
-
 
 function llenar() {
     var arrayEntradas = [];
@@ -284,19 +281,15 @@ function llenarNuevo() {
         arrayReturn.push(arrayEntradas2);
         arrayReturn.push(arraySalidas2);
         return arrayReturn;
-
     }
 
 }
 
 function llenarLENAFD() {
     var leEntrada = document.getElementById("nEntradas").value;
-
     var arraylenguaje = [];
-
     var ArrayDefinitivo = [];
     var contador = 1;
-
 
     while (contador <= leEntrada) {
         var lenguaje = document.getElementById("lenENvalor" + contador).value;
@@ -348,7 +341,6 @@ function llenarLEN() {
     }
 
 }
-
 
 var transiciones0 = ['Entrada', 'Lectura', 'Destino'];
 var transiciones = ['Entrada', 'Lectura', 'Destino', 'Ingresar a la Pila', 'Sacar elemento'];
@@ -483,7 +475,6 @@ function TablaTransicion(arrayConjunto, arraylenguaje, tablaTransicion1) {
 }
 
 function confirmar() {
-
 
     var aux1 = llenarNuevo();
     var aux = llenarLEN();
@@ -1075,13 +1066,8 @@ function ER() {
         aux6 = [];
     for (let i = 0; i < conjunto.length; i++) {
         if (conjunto[i] === transicion[i]) {
-            // aux.push(conjunto[i]);
-            // aux2.push(lenguaje[i]);
             transicion[i] = "*";
-        } else {
-            // aux.push(conjunto[i]);
-            // aux2.push(lenguaje[i]);
-            // aux3.push(transicion[i]);
+            console.log(i, " = ", transicion[i]);
         }
     }
     console.log("TRANSICION =", transicion);
@@ -1099,7 +1085,7 @@ function ER() {
                         console.log("primer valor de valores =", valor1);
                     } else if (conjunto[k] === transicion[j - 1]) {
                         //aux3[k] = "k";
-                        var valor1 = lenguaje[j - 1] + transicion[j - 1] + "(" + lenguaje[j] + ")"; //+"(" + lenguaje[j] + transicion[j] + ")"
+                        var valor1 = lenguaje[j - 1] + "(" + lenguaje[j] + transicion[j] + ")"; //+"(" + lenguaje[j] + transicion[j] + ")"
                         aux4.push(valor1);
                         transicion[k] = "k";
                         console.log("segundo valor de valores =", valor1);
@@ -1119,7 +1105,8 @@ function ER() {
                 for (let i = 0; i < aux4.length; i++) {
                     console.log("LLEGA AQUI 4", aux6);
                     if (aux4[i] !== "0") {
-                        var valor3 = conjunto[m] + lenguaje[m] + aux4[i];
+                        transicion[m] = "*";
+                        var valor3 = conjunto[m - 1] + " = " + lenguaje[m + 1] + transicion[m + 1] + lenguaje[m] + transicion[m] + aux4[i];
                         console.log("primer valor =", valor3);
                         aux6.push(valor3);
                         aux4[i] = "0";
@@ -1130,7 +1117,8 @@ function ER() {
             } else if ((transicion[m + 1] === "k")) {
                 for (let l = 0; l < aux4.length; l++) {
                     if (aux4[l + 1] !== "0") {
-                        var valor3 = conjunto[m - 1] + " = " + lenguaje[m] + transicion[m] + lenguaje[m + 1] + aux4[l];
+                        transicion[m + 1] = "*";
+                        var valor3 = conjunto[m - 1] + " = " + lenguaje[m] + transicion[m] + lenguaje[m + 1] + transicion[m + 1] + aux4[l];
                         console.log("segundo valor =", valor3, aux4[l]);
                         aux6.push(valor3);
                         aux4[l] = "0";
@@ -1152,8 +1140,8 @@ function ER() {
 function union() {
     var validacion = AutomataPila()[0];
     var validacion2 = AutomataPila()[1];
-    if (validacion.length > 1 && validacion2.length > 1) {
-        window.alert("La pila no se vacio correctamente");
+    if (validacion.length > 1 || validacion2.length > 1) {
+        window.alert("La pila no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
     } else {
         union2();
     }
@@ -1162,8 +1150,8 @@ function union() {
 function concatenacion() {
     var validacion3 = AutomataPila()[0];
     var validacion4 = AutomataPila()[1];
-    if (validacion3.length > 1 && validacion4.length > 1) {
-        window.alert("La pila no se vacio correctamente");
+    if (validacion3.length > 1 || validacion4.length > 1) {
+        window.alert("La pila no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
     } else {
         concatenacion2();
     }
@@ -1312,5 +1300,77 @@ function concatenacion2() {
     output5.className = "mb-2 ml-3";
 
 
+
+}
+
+function ER2() {
+    var lenguaje = ObtenerDatos()[1];
+    var conjunto = ObtenerDatos()[0];
+    var transicion = ObtenerDatos()[2];
+    var conjunto1 = llenarNuevo()[0];
+    console.log("valores a trabajar =", conjunto, lenguaje, transicion);
+    var aux3 = [];
+    var aux4 = [],
+        aux5 = [],
+        aux6 = [];
+    for (let i = 0; i < conjunto.length; i++) {
+        if (conjunto[i] === transicion[i]) {
+            transicion[i] = "*";
+            console.log(i, " = ", transicion[i]);
+        }
+    }
+    let pp = llenarLENAFD()[0];
+    let avance = 0;
+    for (let i = 0; i < conjunto1.length; i++) {
+        for (let j = 0; j < transicion.length; j++) {
+            if (conjunto1[i] === transicion[j]) {
+                var NuevosLenguaje = [];
+                var NuevasSalidas = [];
+                let p = llenarLENAFD()[0].length;
+                while (p > 0) {
+                    for (let m = 0; m < conjunto.length; m++) {
+                        console.log("largo de una casilla comun y corriente = ", transicion[m]);
+                        if (conjunto[m] === conjunto1[i]) {
+                            if (transicion[m] === "*") {
+                                NuevosLenguaje.push(lenguaje[m]);
+                                NuevasSalidas.push(transicion[m]);
+                                p--;
+                            } else if (transicion[m].length > 2) {
+                                // NuevosLenguaje.push(transicion[m][0]);
+                                // NuevasSalidas.push(transicion[m][1]);
+                                NuevosLenguaje.push(lenguaje[m]);
+                                NuevasSalidas.push(transicion[m]);
+                                p--;
+
+                            } else { //if(transicion[m] === transicion[j] || transicion[m] !== "*" || transicion[m] !== transicion[j])
+                                NuevosLenguaje.push(lenguaje[m]);
+                                NuevasSalidas.push("*");
+                                p--;
+                            }
+                        }
+                    }
+                }
+                transicion[j] = "";
+                // transicion[j].push(NuevosLenguaje);
+                // transicion[j].push(NuevasSalidas);
+                for (let h = 0; h < NuevosLenguaje.length; h++) {
+                    transicion[j] = transicion[j] + NuevosLenguaje[h] + NuevasSalidas[h];
+                    console.log(transicion[j].split("").sort());
+                    console.log("Valores = ", conjunto[i], " = ", transicion[j]);
+                }
+            }
+        }
+        // if(i === conjunto1.length-1){
+        //     for(let u = 0 ; u < ){
+        //         for(let k = 0; k < transicion.length ; k++){
+        //             if(transicion[k].length === 2){
+
+
+        //             }
+        //         }
+
+        //     }
+        // }
+    }
 
 }
