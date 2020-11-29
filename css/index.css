@@ -39,7 +39,9 @@ h3,
     line-height: 1.5 !important;
     font-size: 30px;
 }
-
+h5{
+    font-weight: 400;
+}
 #first h1 {
     font-size: 40px;
     color: var(--white);

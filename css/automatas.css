@@ -7,7 +7,7 @@
 }
 
 #auto2 {
-    margin-left: 43% !important;
+    margin-left: 40% !important;
 }
 
 
@@ -122,4 +122,8 @@ margin-right: 5% !important;
 #bordes .col-md-6 {
     /*border-right: white !important;*/
     border-right: 5px solid white !important;
+}
+
+.bg-warning{
+    background-color: var(--warning) !important;
 }

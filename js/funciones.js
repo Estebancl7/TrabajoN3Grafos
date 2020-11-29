@@ -642,10 +642,12 @@ function primeraQuintuplaAFD() {
 
 
     output1.textContent = (`El conjunto Q de estados es:  [${conjunto1}]:`);
+    output1.className = "pt-4";
     output2.textContent = (`El estado inicial es:  [${entrada1}]`);
     output3.textContent = (`El conjunto de salidas del automata 1 es:  [${salida1}]`);
     output4.textContent = (`El alfabeto asociado es:  [${lenguaje}]:`);
     output5.textContent = (`La transicion 1 es:  [${transicion1}]:`);
+    output5.className = "pb-4"
 
 }
 
@@ -1053,16 +1055,12 @@ function AutomataPila() {
 
 }
 
-function ER() {
+function ER() { //SOLO PARA DOS ESTADOS!
     var lenguaje = ObtenerDatos()[1];
     var conjunto = ObtenerDatos()[0];
     var transicion = ObtenerDatos()[2];
     console.log("valores a trabajar =", conjunto, lenguaje, transicion);
-    var aux = [];
-    var aux2 = [];
-    var aux3 = [];
     var aux4 = [],
-        aux5 = [],
         aux6 = [];
     for (let i = 0; i < conjunto.length; i++) {
         if (conjunto[i] === transicion[i]) {
@@ -1076,7 +1074,6 @@ function ER() {
             for (let k = 0; k < lenguaje.length; k++) {
                 if (transicion[k] === conjunto[j]) {
                     if (conjunto[k] === transicion[j]) {
-                        //aux3[k] = "k";
                         console.log("valor cambiado a k =", transicion[k]);
                         var valor1 = lenguaje[j - 1] + transicion[j - 1] + "(" + lenguaje[j] + ")"; //"(" + lenguaje[j] + transicion[j] + ")"
                         console.log("VALOR1 =", valor1);
@@ -1084,7 +1081,6 @@ function ER() {
                         transicion[k] = "k";
                         console.log("primer valor de valores =", valor1);
                     } else if (conjunto[k] === transicion[j - 1]) {
-                        //aux3[k] = "k";
                         var valor1 = lenguaje[j - 1] + "(" + lenguaje[j] + transicion[j] + ")"; //+"(" + lenguaje[j] + transicion[j] + ")"
                         aux4.push(valor1);
                         transicion[k] = "k";
@@ -1095,7 +1091,6 @@ function ER() {
         }
     }
     console.log("LLEGA AQUI", aux4);
-    let p = 0;
     for (let m = 0; m < conjunto.length; m++) {
         console.log("LLEGA AQUI", conjunto.length);
         if (conjunto[m] === conjunto[m + 1]) {
@@ -1111,7 +1106,6 @@ function ER() {
                         aux6.push(valor3);
                         aux4[i] = "0";
                         i = aux4.length;
-                        p++;
                     }
                 }
             } else if ((transicion[m + 1] === "k")) {
@@ -1123,7 +1117,6 @@ function ER() {
                         aux6.push(valor3);
                         aux4[l] = "0";
                         l = aux4.length;
-                        p++;
                     }
                 }
             } else {
@@ -1315,19 +1308,14 @@ function ER2() {
     var conjunto = ObtenerDatos()[0];
     var transicion = ObtenerDatos()[2];
     var conjunto1 = llenarNuevo()[0];
+    var Er = "No hay ER que lo defina";
     console.log("valores a trabajar =", conjunto, lenguaje, transicion);
-    var aux3 = [];
-    var aux4 = [],
-        aux5 = [],
-        aux6 = [];
     for (let i = 0; i < conjunto.length; i++) {
         if (conjunto[i] === transicion[i]) {
             transicion[i] = "*";
             console.log(i, " = ", transicion[i]);
         }
     }
-    let pp = llenarLENAFD()[0];
-    let avance = 0;
     for (let i = 0; i < conjunto1.length; i++) {
         for (let j = 0; j < transicion.length; j++) {
             if (conjunto1[i] === transicion[j]) {
@@ -1336,20 +1324,18 @@ function ER2() {
                 let p = llenarLENAFD()[0].length;
                 while (p > 0) {
                     for (let m = 0; m < conjunto.length; m++) {
-                        console.log("largo de una casilla comun y corriente = ", transicion[m]);
+                        console.log("Transicion que ingresa = ", transicion[m]);
                         if (conjunto[m] === conjunto1[i]) {
                             if (transicion[m] === "*") {
                                 NuevosLenguaje.push(lenguaje[m]);
                                 NuevasSalidas.push(transicion[m]);
                                 p--;
                             } else if (transicion[m].length > 2) {
-                                // NuevosLenguaje.push(transicion[m][0]);
-                                // NuevasSalidas.push(transicion[m][1]);
                                 NuevosLenguaje.push(lenguaje[m]);
                                 NuevasSalidas.push(transicion[m]);
                                 p--;
 
-                            } else { //if(transicion[m] === transicion[j] || transicion[m] !== "*" || transicion[m] !== transicion[j])
+                            } else {
                                 NuevosLenguaje.push(lenguaje[m]);
                                 NuevasSalidas.push("*");
                                 p--;
@@ -1358,27 +1344,14 @@ function ER2() {
                     }
                 }
                 transicion[j] = "";
-                // transicion[j].push(NuevosLenguaje);
-                // transicion[j].push(NuevasSalidas);
                 for (let h = 0; h < NuevosLenguaje.length; h++) {
                     transicion[j] = transicion[j] + NuevosLenguaje[h] + NuevasSalidas[h];
                     console.log(transicion[j].split("").sort());
-                    console.log("Valores = ", conjunto[i], " = ", transicion[j]);
-                    var Er = transicion[j];
+                    console.log("Valores = ", transicion[j]);
+                    Er = transicion[j];
                 }
             }
         }
-        // if(i === conjunto1.length-1){
-        //     for(let u = 0 ; u < ){
-        //         for(let k = 0; k < transicion.length ; k++){
-        //             if(transicion[k].length === 2){
-
-
-        //             }
-        //         }
-
-        //     }
-        // }
     }
     return Er;
 
@@ -1390,6 +1363,7 @@ function imprimirEr(){
     const output1 = document.querySelector("#LenguajeAsociado1");
     const output2 = document.querySelector("#LenguajeAsociado2");
     output1.textContent = (`Expresion regular del Automata`);
+    output1.className = "mb-3 pt-4";
     output2.textContent = (`Er = [${expresion}]`);
-    output2.className = "mb-2 ml-3";
+    output2.className = "mb-4 pb-4";
 }
