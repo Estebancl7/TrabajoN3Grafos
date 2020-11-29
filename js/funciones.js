@@ -1140,9 +1140,13 @@ function ER() {
 function union() {
     var validacion = AutomataPila()[0];
     var validacion2 = AutomataPila()[1];
-    if (validacion.length > 1 || validacion2.length > 1) {
-        window.alert("La pila no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
-    } else {
+    if (validacion.length > 1 ) {
+        window.alert("La pila 1 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
+    } 
+    else if(validacion2.length > 1 ){
+        window.alert("La pila 2 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");        
+    }
+    else if(validacion.length === 1 && validacion2.length === 1) {
         union2();
     }
 }
@@ -1150,9 +1154,12 @@ function union() {
 function concatenacion() {
     var validacion3 = AutomataPila()[0];
     var validacion4 = AutomataPila()[1];
-    if (validacion3.length > 1 || validacion4.length > 1) {
-        window.alert("La pila no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
-    } else {
+    if (validacion3.length > 1 ) {
+        window.alert("La pila 1 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
+    }else if(validacion4.length>1){
+        window.alert("La pila 2 no se vacio correctamente, pero... no te preocupes!, puedes modificarlo directamente en la tabla de transiciones");
+    } 
+    else if(validacion3.length === 1 && validacion4.length === 1) {
         concatenacion2();
     }
 }
@@ -1357,6 +1364,7 @@ function ER2() {
                     transicion[j] = transicion[j] + NuevosLenguaje[h] + NuevasSalidas[h];
                     console.log(transicion[j].split("").sort());
                     console.log("Valores = ", conjunto[i], " = ", transicion[j]);
+                    var Er = transicion[j];
                 }
             }
         }
@@ -1372,5 +1380,16 @@ function ER2() {
         //     }
         // }
     }
+    return Er;
 
+    
+}
+
+function imprimirEr(){
+    var expresion= ER2();
+    const output1 = document.querySelector("#LenguajeAsociado1");
+    const output2 = document.querySelector("#LenguajeAsociado2");
+    output1.textContent = (`Expresion regular del Automata`);
+    output2.textContent = (`Er = [${expresion}]`);
+    output2.className = "mb-2 ml-3";
 }
